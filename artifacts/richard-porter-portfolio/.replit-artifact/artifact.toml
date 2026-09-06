@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Richard Porter Portfolio"
+description = "A responsive single-page portfolio website rebuilt from the approved reference site, with a personal introduction, selected work, career details, and contact pathways."
+version = "1.0.0"
+id = "artifacts/richard-porter-portfolio"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 19623
+
+[services.development]
+run = "pnpm --filter @workspace/richard-porter-portfolio run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/richard-porter-portfolio", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/richard-porter-portfolio/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "19623"
+BASE_PATH = "/"
